@@ -1,0 +1,119 @@
+header {
+  height: 60px;
+  width: 100%;
+  background-color: var(--secondary-bg-color);
+  color: var(--header-text-color);
+  font-size: var(--font-size-medium);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-bar {
+  display: none;
+}
+
+/* left header */
+.github-logo,
+.header-menu-left,
+.header-menu-left nav,
+.header-menu-left nav ul {
+  display: flex;
+  align-items: center;
+}
+
+.header-menu-left nav label {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: flex;
+}
+
+.header-menu-left nav label input {
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.header-menu-left nav label .fa-slash {
+  background-color: var(--secondary-bg-color);
+  border: 1px solid var(--border-color);
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.header-menu-left nav ul li {
+  font-weight: var(--font-weight-lightbold);
+  margin: 0 0.5rem;
+}
+
+.header-menu-left nav ul li a {
+  color: var(--header-text-color);
+  white-space: nowrap;
+}
+
+.header-menu-left nav ul li a:hover {
+  color: var(--header-text-color-hover);
+}
+
+/* header right menu */
+.header-menu-right,
+.caret-options,
+.profile-pic-header {
+  display: flex;
+  align-items: center;
+}
+
+.caret-options,
+.profile-pic-header {
+  margin: 0 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  /* header */
+  .nav-bar {
+    display: inline;
+  }
+
+  .profile-pic-header,
+  .caret-options {
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header-menu-left nav,
+  .header-menu-left nav ul {
+    flex-direction: column;
+  }
+
+  .header-nav {
+    background-color: var(--secondary-bg-color);
+    position: absolute;
+    width: 100%;
+    flex-direction: column;
+    top: 60px;
+    left: -100%;
+    right: 0;
+    z-index: 32;
+  }
+
+  .header-nav.mobile-nav {
+    left: 0;
+  }
+
+  .header-menu-left nav ul,
+  .header-menu-left nav label {
+    width: 95%;
+    margin-top: 8px;
+  }
+
+  .header-menu-left nav ul li {
+    border-bottom: 1px solid var(--border-color-light);
+    width: 100%;
+    padding: 1rem 0;
+  }
+}

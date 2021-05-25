@@ -1,0 +1,255 @@
+/* ------------------------------ */
+/* sub header */
+.sub-header {
+  background-color: var(--primary-bg-color);
+  border-bottom: 1px solid var(--border-color-light);
+  position: sticky;
+  overflow-y: hidden;
+  overflow-x: auto;
+  height: 60px;
+  display: flex;
+  top: 0;
+}
+
+.sub-header ul {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  margin-left: 30%;
+}
+
+.sub-header ul li {
+  font-size: var(--font-size-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.5rem;
+  padding-top: 30px;
+}
+
+.sub-header ul li:hover {
+  color: var(--primary-text-color);
+  font-weight: var(--font-weight-lightbold);
+}
+
+.sub-header ul li a {
+  color: var(--secondary-text-color);
+  margin: 0px 4px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.sub-header ul li a.active {
+  border-bottom: 2px solid #d73a49;
+}
+
+.repo-count {
+  background-color: var(--border-color-light);
+  padding: 0px 6px;
+  border-radius: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+/* main body repo */
+
+.profile-repo-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-repo-list .profile-sec {
+  width: 30%;
+  position: absolute;
+  top: 90px;
+}
+
+.profile-repo-list .profile-sec .profile-sec-inner {
+  width: 80%;
+  margin: auto;
+}
+
+.profile-repo-list .profile-sec .prof-pic img {
+  width: 95%;
+  text-align: center;
+  height: 100%;
+}
+
+#fullname {
+  color: var(--primary-text-color);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.username {
+  color: #586069;
+  font-size: var(--font-size-medium-lg);
+}
+
+.userbio {
+  color: var(--primary-text-color);
+  font-size: var(--font-size-medium);
+}
+
+/* repo lists */
+.profile-repo-list .repo-sec {
+  width: 70%;
+  margin-left: 30%;
+  padding: 0;
+  padding-top: 20px;
+}
+
+.repo-sec label {
+  border: 1px solid var(--border-color-light);
+  color: var(--secondary-text-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.repo-sec input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 90%;
+}
+
+.repo-sec .repos {
+  width: 95%;
+}
+
+.repo-sec .repos li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color-light);
+  padding: 1.5rem 0;
+}
+
+.repos .repo-name {
+  color: var(--tetiary-text-color);
+  font-weight: var(--font-weight-lightbold);
+  font-size: var(--font-size-medium-lg);
+}
+
+.repos .repo-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.repos .repo-info,
+.repo-desc {
+  color: var(--secondary-text-color);
+  font-size: var(--font-size-small);
+}
+
+.programmingLang-color {
+  border-radius: 50%;
+  margin-right: 4px;
+  height: 0.75rem;
+  width: 0.75rem;
+  color: transparent;
+  font-size: var(--font-size-small);
+}
+
+.octicon-star,
+.octicon-repo-forked,
+.date {
+  font-size: var(--font-size-small);
+  fill: var(--secondary-text-color);
+  margin-left: 0.75rem;
+}
+
+.repos li .star-btn {
+  background-color: var(--tetiary-bg-color);
+  border: 0.5px solid var(--border-color-light);
+  color: var(--primary-text-color);
+  padding: 5px 20px;
+  border-radius: 4px;
+  outline: none;
+  box-shadow: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.star-btn .octicon-star {
+  margin-right: 6px;
+}
+
+.prof-img-large,
+.prof-img-small {
+  border-radius: 50%;
+}
+
+.prof-img-small {
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  /* sub header */
+  .sub-header {
+    margin-top: 150px;
+  }
+
+  .sub-header ul {
+    width: 95%;
+    margin: auto;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  /* repo list section */
+  .repo-sec input {
+    width: 95%;
+    margin: auto;
+  }
+
+  /* main*/
+  .profile-repo-list .profile-sec {
+    top: 60px;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .profile-sec-inner-mobile {
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-sec-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .profile-repo-list .profile-sec .profile-sec-inner {
+    width: 95%;
+  }
+
+  .prof-pic {
+    width: 20%;
+  }
+
+  .profile-repo-list .repo-sec {
+    margin: auto;
+    width: 95%;
+  }
+
+  /* repos */
+  .repo-sec .repos {
+    width: 100%;
+  }
+}
+
+/* 480px screen width */
+
+@media screen and (max-width: 480px) {
+  .sub-header {
+    margin-top: 130px;
+  }
+}

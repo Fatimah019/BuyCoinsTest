@@ -1,0 +1,34 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.login-page form {
+  min-width: 50%;
+  text-align: center;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+
+/* input:focus {
+  background-color: transparent;
+} */
+
+.login-page form input[type="text"] {
+  width: 100%;
+  padding: 5px 15px;
+}
+
+.login-page form input[type="submit"] {
+  min-width: 50%;
+}
+
+.login-page form input[type="submit"]:hover {
+  border: 1px solid red;
+}
