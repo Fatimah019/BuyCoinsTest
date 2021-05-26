@@ -1,9 +1,9 @@
 // chnage active link class name to active
-const activeLink = document.querySelector(".sub-header").querySelectorAll("a");
+const links = document.querySelector(".sub-header").querySelectorAll("a");
 
-activeLink.forEach((el) => {
+links.forEach((el) => {
   el.addEventListener("click", function () {
-    activeLink.forEach((nav) => {
+    links.forEach((nav) => {
       nav.classList.remove("active");
       this.classList.add("active");
     });

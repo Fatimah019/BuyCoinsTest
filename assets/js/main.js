@@ -1,6 +1,6 @@
-import { options } from "./query.js";
-// github api root endpoint
-const githubUrl = "https://api.github.com/graphql";
+import { options } from "./query.js"; //import query config
+
+const githubUrl = "https://api.github.com/graphql"; // github api root endpoint
 
 let displayName = document.getElementById("fullname");
 let userName = document.getElementsByClassName("username");
@@ -14,10 +14,8 @@ const fetchGithubUserData = () => {
   fetch(githubUrl, options)
     .then((res) => res.json())
     .then((res) => {
-      // if (res.data.viewer.login && res.data.viewer.login === user.value) {
-      // console.log(res.data);
-
       let userinfo = res.data.viewer;
+
       // display user's full name
       displayName.innerHTML = userinfo.name;
       // display username
@@ -132,12 +130,18 @@ const fetchGithubUserData = () => {
           })
           .join("") +
         "</ul>";
-      // } else {
-      //   userProfilePage.style.display = "none";
-      //   errorPage.style.display = "block";
-      // }
     });
 };
-fetchGithubUserData();
+
+// lod user if local storage is not empty
+function checkUser() {
+  let user = localStorage.getItem("user");
+  if (user) {
+    fetchGithubUserData();
+  } else {
+    window.location = "error.html";
+  }
+}
+checkUser();
 
 export default fetchGithubUserData;

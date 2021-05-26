@@ -1,5 +1,4 @@
 import GITHUB_API_KEY from "./apikey.js";
-import fetchGithubUserData from "./main.js";
 // query(schema)
 const query = `
   query {

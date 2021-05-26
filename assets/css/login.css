@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
 }
 
 .login-page form {
@@ -12,6 +11,10 @@
 }
 
 input {
+  /* background-color: transparent; */
+  color: var(--secondary-text-color);
+  border: 1px solid var(--border-color);
+  width: 100%;
   outline: none;
   border: none;
 }
@@ -23,6 +26,7 @@ input {
 .login-page form input[type="text"] {
   width: 100%;
   padding: 5px 15px;
+  background-color: black;
 }
 
 .login-page form input[type="submit"] {
