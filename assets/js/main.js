@@ -138,5 +138,6 @@ const fetchGithubUserData = () => {
       // }
     });
 };
+// fetchGithubUserData();
 
 export default fetchGithubUserData;

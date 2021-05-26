@@ -1,4 +1,5 @@
-import accessToken from "./apikey.js";
+import GITHUB_API_KEY from "./apikey.js";
+import fetchGithubUserData from "./main.js";
 // query(schema)
 const query = `
   query {
@@ -35,7 +36,7 @@ const options = {
   headers: {
     "Content-type": "application/json;charset=UTF-8",
     "Access-Control-Request-Headers": "X-Custom-Header",
-    Authorization: "bearer " + accessToken,
+    Authorization: "bearer " + GITHUB_API_KEY,
   },
   body: JSON.stringify({ query }),
 };
