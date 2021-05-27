@@ -13,7 +13,6 @@ export const items = {
   reposContainer: document.querySelector("#repos"),
   navMenu: document.querySelector(".header-nav"),
   navBar: document.querySelector(".nav-bar"),
-  links: document.querySelector(".sub-header").querySelectorAll("a"),
   monthArray: [
     "January",
     "February",

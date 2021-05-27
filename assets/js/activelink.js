@@ -1,8 +1,7 @@
-import { items } from "./query.js";
-
 // chnage active link class name to active
+const links = document.querySelector(".sub-header").querySelectorAll("a");
 
-items.links.forEach((el) => {
+links.forEach((el) => {
   el.addEventListener("click", function () {
     links.forEach((nav) => {
       nav.classList.remove("active");
