@@ -40,9 +40,11 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 li {
   list-style-type: none;
 }
+
 a {
   text-decoration: none;
   cursor: pointer;
@@ -52,6 +54,7 @@ a {
   fill: var(--header-text-color);
   margin: 0px 0.5rem;
 }
+
 .octicon-2 {
   fill: var(--secondary-text-color);
   margin-right: 0.5rem;

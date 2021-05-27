@@ -1,5 +1,5 @@
 # BuyCoinsJobTest
 
-##Link to the page: hoated on netlify
+##Link to the page: hosted on netlify
 
-https://buycoinstestbyfatimahdavies.netlify.app/
+https://buycoinstest1.netlify.app/

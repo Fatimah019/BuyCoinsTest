@@ -1,4 +1,35 @@
 import GITHUB_API_KEY from "./apikey.js";
+const githubUrl = "https://api.github.com/graphql";
+
+// documents
+export const items = {
+  user: localStorage.getItem("user"),
+  displayName: document.getElementById("fullname"),
+  userName: document.getElementsByClassName("username"),
+  userBio: document.getElementsByClassName("userbio"),
+  profilePic: document.getElementsByClassName("prof-img"),
+  repoCount: document.getElementsByClassName("repo-count"),
+  projCount: document.getElementsByClassName("project-count"),
+  reposContainer: document.querySelector("#repos"),
+  navMenu: document.querySelector(".header-nav"),
+  navBar: document.querySelector(".nav-bar"),
+  links: document.querySelector(".sub-header").querySelectorAll("a"),
+  monthArray: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "Novermber",
+    "December",
+  ],
+};
+
 // query(schema)
 const query = `
   query {
@@ -40,4 +71,16 @@ const options = {
   body: JSON.stringify({ query }),
 };
 
-export { options };
+// api call class
+export default class Api {
+  fetchApi() {
+    return fetch(githubUrl, options)
+      .then((res) => res.json())
+      .then((res) => {
+        return res.data.viewer;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+}

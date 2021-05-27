@@ -1,76 +1,54 @@
-import { options } from "./query.js"; //import query config
-
-const githubUrl = "https://api.github.com/graphql"; // github api root endpoint
-
-let displayName = document.getElementById("fullname");
-let userName = document.getElementsByClassName("username");
-let userBio = document.getElementsByClassName("userbio");
-let profilePic = document.getElementsByClassName("prof-img");
-let repoCount = document.getElementsByClassName("repo-count");
-let projCount = document.getElementsByClassName("project-count");
+import Api, { items } from "./query.js";
 
 const fetchGithubUserData = () => {
-  // fetch
-  fetch(githubUrl, options)
-    .then((res) => res.json())
-    .then((res) => {
-      let userinfo = res.data.viewer;
+  //   create a new instance of the Api class
+  let userData = new Api();
 
+  try {
+    userData.fetchApi().then((data) => {
       // display user's full name
-      displayName.innerHTML = userinfo.name;
+      items.displayName.innerHTML = data.name;
+
       // display username
-      for (const user_name of userName) {
-        user_name.innerHTML = userinfo.login;
+      for (const user_name of items.userName) {
+        user_name.innerHTML = data.login;
       }
+
       // display bio
-      for (const user_bio of userBio) {
-        user_bio.innerHTML = userinfo.bio;
+      for (const user_bio of items.userBio) {
+        user_bio.innerHTML = data.bio;
       }
+
       // display profile pic
-      for (const user_prof_pic of profilePic) {
-        user_prof_pic.src = userinfo.avatarUrl;
+      for (const user_prof_pic of items.profilePic) {
+        user_prof_pic.src = data.avatarUrl;
       }
+
       // repo count
-      for (const repoC of repoCount) {
+      for (const repoC of items.repoCount) {
         repoC.innerHTML =
-          userinfo.repositories.totalCount === ""
+          data.repositories.totalCount === ""
             ? 0
-            : userinfo.repositories.totalCount;
+            : data.repositories.totalCount;
       }
+
       // project count
-      for (const projC of projCount) {
+      for (const projC of items.projCount) {
         projC.innerHTML =
-          userinfo.projects.totalCount === 0
-            ? ""
-            : userinfo.projects.totalCount;
+          data.projects.totalCount === 0 ? "" : data.projects.totalCount;
       }
 
       // display repos
-      let repos = userinfo.repositories.nodes;
-      let reposContainer = document.querySelector("#repos");
+      let repos = data.repositories.nodes;
 
-      reposContainer.innerHTML =
+      items.reposContainer.innerHTML =
         "<ul>" +
         repos
           .map(function (repo) {
             // date format
-            let monthArray = [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "Novermber",
-              "December",
-            ];
             let updatedDate = repo.updatedAt;
             let date = new Date(updatedDate);
-            let getMonth = monthArray[date.getMonth()];
+            let getMonth = items.monthArray[date.getMonth()];
 
             return `
             <li >
@@ -131,17 +109,17 @@ const fetchGithubUserData = () => {
           .join("") +
         "</ul>";
     });
+  } catch (err) {
+    document.write(err);
+  }
 };
 
-// lod user if local storage is not empty
-function checkUser() {
-  let user = localStorage.getItem("user");
-  if (user) {
+// load user if local storage is not empty
+const checkUser = () => {
+  if (items.user) {
     fetchGithubUserData();
   } else {
     window.location = "error.html";
   }
-}
+};
 checkUser();
-
-export default fetchGithubUserData;

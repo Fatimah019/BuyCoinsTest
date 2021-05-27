@@ -1,26 +1,27 @@
-// import api key
-import { options } from "./query.js"; //import query config
-
-const githubUrl = "https://api.github.com/graphql"; // github api root endpoint
+// import api call class
+import Api from "./query.js";
 
 let loginForm = document.querySelector("#form");
-let user = document.querySelector("#username");
-
-loginForm.addEventListener("submit", submitForm);
+let userinput = document.querySelector("#username");
 
 // function that submits user's username and fetches repo list
-function submitForm(event) {
+
+loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  fetch(githubUrl, options)
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.data.viewer.login && res.data.viewer.login === user.value) {
-        localStorage.setItem("user", res.data.viewer.login);
+  //   create a new instance of the Api class
+  let userData = new Api();
+  try {
+    userData.fetchApi().then((user) => {
+      if (user.login && user.login === userinput.value) {
+        localStorage.setItem("user", user.login);
         window.location = "profile.html";
-      } else if (user.value < 1) {
-        alert("input field cannot be empty");
+      } else if (userinput.value < 1) {
+        alert("Input field cannot be empty");
       } else {
         window.location = "error.html";
       }
     });
-}
+  } catch (err) {
+    document.write(err);
+  }
+});
