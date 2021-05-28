@@ -11,7 +11,7 @@
   box-shadow: 2px 2px 2px #0366d6;
 }
 .login-page {
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
