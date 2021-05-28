@@ -1,3 +1,6 @@
+:root {
+  --btn-text-color: #fff;
+}
 .login-page {
   min-height: 100vh;
   display: flex;
@@ -34,7 +37,7 @@ input {
 .login-page form input[type="submit"] {
   min-width: 40%;
   background-color: var(--secondary-bg-color);
-  color: var(--header-text-color);
+  color: var(--btn-text-color);
   padding: 0.5em;
   border-radius: 4px;
   margin-top: 1rem;

@@ -101,18 +101,20 @@
 }
 
 .octicon-star,
-.octicon-repo-forked,
-.date {
-  font-size: var(--font-size-small);
+.octicon-fork,
+.date-updated {
   fill: var(--secondary-text-color);
   margin-left: 0.75rem;
 }
-
+.octicon-star,
+.octicon-fork {
+  margin-right: 0.25rem;
+}
 .repos li .star-btn {
   background-color: var(--tetiary-bg-color);
   border: 0.5px solid var(--border-color-light);
   color: var(--primary-text-color);
-  padding: 0.325rem 0.75rem;
+  padding: 0.325rem 1rem;
   border-radius: 4px;
   outline: none;
   box-shadow: none;
@@ -122,8 +124,9 @@
   text-align: center;
 }
 
-.star-btn .octicon-star {
-  margin-right: 0.15rem;
+.octicon-star-btn {
+  margin-right: 0.25rem;
+  fill: var(--secondary-text-color);
 }
 
 .prof-img-large,
@@ -181,7 +184,7 @@
   }
 
   .repos li .star-btn {
-    padding: 0.325rem 0.5rem;
+    padding: 0.325rem 0.625rem;
   }
 
   .star-btn .octicon-star {
