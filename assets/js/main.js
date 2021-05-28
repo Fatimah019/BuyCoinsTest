@@ -1,125 +1,110 @@
-import Api, { items } from "./query.js";
+import { items } from "./items.js";
+// import Api from "./query.js";
 
-const fetchGithubUserData = () => {
-  //   create a new instance of the Api class
-  let userData = new Api();
+if (items.user !== null && items.user !== "") {
+  items.displayName.innerHTML = items.user.user.name;
+  for (const user_name of items.userName) {
+    user_name.innerHTML = items.user.user.login;
+  }
 
-  try {
-    userData.fetchApi().then((data) => {
-      // display user's full name
-      items.displayName.innerHTML = data.name;
+  // display bio
+  for (const user_bio of items.userBio) {
+    user_bio.innerHTML = items.user.user.bio;
+  }
 
-      // display username
-      for (const user_name of items.userName) {
-        user_name.innerHTML = data.login;
-      }
+  // display profile pic
+  for (const user_prof_pic of items.profilePic) {
+    user_prof_pic.src = items.user.user.avatarUrl;
+  }
 
-      // display bio
-      for (const user_bio of items.userBio) {
-        user_bio.innerHTML = data.bio;
-      }
+  // repo count
+  for (const repoC of items.repoCount) {
+    repoC.innerHTML =
+      items.user.user.repositories.totalCount === ""
+        ? 0
+        : items.user.user.repositories.totalCount;
+  }
 
-      // display profile pic
-      for (const user_prof_pic of items.profilePic) {
-        user_prof_pic.src = data.avatarUrl;
-      }
+  // project count
+  for (const projC of items.projCount) {
+    projC.innerHTML =
+      items.user.user.projects.totalCount === 0
+        ? ""
+        : items.user.user.projects.totalCount;
+  }
 
-      // repo count
-      for (const repoC of items.repoCount) {
-        repoC.innerHTML =
-          data.repositories.totalCount === ""
-            ? 0
-            : data.repositories.totalCount;
-      }
+  // display repos
+  let repos = items.user.user.repositories.nodes;
 
-      // project count
-      for (const projC of items.projCount) {
-        projC.innerHTML =
-          data.projects.totalCount === 0 ? "" : data.projects.totalCount;
-      }
+  items.reposContainer.innerHTML =
+    "<ul>" +
+    repos
+      .map(function (repo) {
+        // date format
+        let updatedDate = repo.updatedAt;
+        let date = new Date(updatedDate);
+        let getMonth = items.monthArray[date.getMonth()];
 
-      // display repos
-      let repos = data.repositories.nodes;
-
-      items.reposContainer.innerHTML =
-        "<ul>" +
-        repos
-          .map(function (repo) {
-            // date format
-            let updatedDate = repo.updatedAt;
-            let date = new Date(updatedDate);
-            let getMonth = items.monthArray[date.getMonth()];
-
-            return `
-            <li >
-              <div>
-                <p>
-                  <a href=${repo.url} class="repo-name">${repo.name}</a>
-                </p>
+        return `
+              <li >
                 <div>
-                ${
-                  repo.description === null
-                    ? ""
-                    : `  <p class="repo-desc">${repo.description}</p>`
-                }
-                <div class="repo-info">
-                  <span class="programmingLang-color"
-                  style="background-color: ${
-                    repo.primaryLanguage.color
-                  }"></span>  ${repo.primaryLanguage.name}
+                  <p>
+                    <a href=${repo.url} class="repo-name">${repo.name}</a>
+                  </p>
+                  <div>
+                  ${
+                    repo.description === null
+                      ? ""
+                      : `  <p class="repo-desc">${repo.description}</p>`
+                  }
+                  <div class="repo-info">
+                    
+                    ${
+                      repo.stargazerCount < 1
+                        ? " "
+                        : `
+                      <svg aria-label="star" class="octicon-star" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg>
+                      ${repo.stargazerCount}
+                      `
+                    }
+  
+                    ${
+                      repo.forkCount < 1
+                        ? " "
+                        : `
+                      <svg aria-label="fork" class="octicon-repo-forked" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg>
+                      ${repo.forkCount}
+                      `
+                    }
+  
+                    Updated on ${getMonth} ${date.getDate()}, ${date.getFullYear()}
+                  </div>
+  
+                </div>
+  
+                </div>
+  
+                <button class="star-btn">
+                ${`
+                  <svg aria-label="star" class="octicon-star" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg>
+  
                   ${
                     repo.stargazerCount < 1
-                      ? " "
-                      : `
-                    <svg aria-label="star" class="octicon-star" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg>
-                    ${repo.stargazerCount}
-                    `
+                      ? `<span>Star</span>`
+                      : `<span>Unstar</span>`
                   }
+                  `}
+                </button>
+              </li>
+              `;
+      })
+      .join("") +
+    "</ul>";
+} else {
+  console.log("err");
+}
 
-                  ${
-                    repo.forkCount < 1
-                      ? " "
-                      : `
-                    <svg aria-label="fork" class="octicon-repo-forked" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg>
-                    ${repo.forkCount}
-                    `
-                  }
-
-                  Updated on ${getMonth} ${date.getDate()}, ${date.getFullYear()}
-                </div>
-
-              </div>
-
-              </div>
-
-              <button class="star-btn">
-              ${`
-                <svg aria-label="star" class="octicon-star" viewBox="0 0 16 16" version="1.1" width="16" height="16" role="img"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg>
-
-                ${
-                  repo.stargazerCount < 1
-                    ? `<span>Star</span>`
-                    : `<span>Unstar</span>`
-                }
-                `}
-              </button>
-            </li>
-            `;
-          })
-          .join("") +
-        "</ul>";
-    });
-  } catch (err) {
-    document.write(err);
-  }
-};
-
-// load user if local storage is not empty
-const checkUser = () => {
-  if (items.user) {
-    fetchGithubUserData();
-  } else {
-    window.location = "error.html";
-  }
-};
-checkUser();
+// <span class="programmingLang-color"
+//                     style="background-color: ${
+//                       repo.primaryLanguage.color
+//                     }"></span>  ${repo.primaryLanguage.name}

@@ -1,27 +1,29 @@
-// import api call class
+// // import api call class
 import Api from "./query.js";
+import { items } from "./items.js";
 
-let loginForm = document.querySelector("#form");
-let userinput = document.querySelector("#username");
+// login function
 
-// function that submits user's username and fetches repo list
-
-loginForm.addEventListener("submit", (event) => {
+items.loginForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  //   create a new instance of the Api class
-  let userData = new Api();
+  let newApiCall = new Api();
   try {
-    userData.fetchApi().then((user) => {
-      if (user.login && user.login === userinput.value) {
-        localStorage.setItem("user", user.login);
-        window.location = "profile.html";
-      } else if (userinput.value < 1) {
-        alert("Input field cannot be empty");
-      } else {
-        window.location = "error.html";
-      }
-    });
+    newApiCall
+      .getApi()
+      .then((data) => {
+        if (items.usernameInput.value < 1) {
+          alert("Input field cannot be empty");
+        } else if (data.user === null || !data.user) {
+          window.location = "error.html";
+        } else {
+          window.location = "profile.html";
+          localStorage.setItem("user", JSON.stringify(data));
+        }
+      })
+      .catch((err) => {
+        return err;
+      });
   } catch (err) {
-    document.write(err);
+    return err;
   }
 });

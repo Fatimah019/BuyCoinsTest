@@ -1,6 +1,5 @@
-import { items } from "./query.js";
+import { items } from "./items.js";
 
-//nav bar
 // toggle nav bar
 items.navBar.addEventListener("click", () => {
   items.navMenu.classList.toggle("mobile-nav");
